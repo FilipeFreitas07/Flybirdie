@@ -4,7 +4,10 @@ class Game {
         this.ctx = context;
         this.width = this.canvas.width;
         this.height = this.canvas.height;
+        this.baseHeight = 720;
+        this.ratio = this.height / this.baseHeight;
         this.player = new Player(this);
+        this.gravity;
 
         this.resize(window.innerWidth, window.innerHeight);
     
@@ -19,10 +22,14 @@ class Game {
         this.width = this.canvas.width;
         this.height = this.canvas.height;
         this.ctx.fillStyle = '#5995F2'
+        this.ratio = this.height / this.baseHeight;
+
+        this.gravity = 0.15 * this.ratio;
+        this.player.resize();
     }
 
     render() {
-        this.ctx.fillStyle = 'red';
+        //this.ctx.fillStyle = 'red';
         this.player.update();
         this.player.draw();
     }
@@ -31,7 +38,7 @@ class Game {
 window.addEventListener('load', function() {
     const canvas = document.getElementById('game-layout');
     const ctx = canvas.getContext('2d');
-    canvas.width = 720;
+    canvas.width = 2400;
     canvas.height = 720;
 
     const game = new Game(canvas, ctx);
